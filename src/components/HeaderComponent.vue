@@ -1,14 +1,14 @@
 <template>
   <header class="header">
     <!-- Logo Starts Here -->
-    <router-link class="logo" :to="{ name: Home }"
+    <router-link class="logo" :to="{ name: 'Home' }"
       ><img src="../assets/logo.jpg" alt="logo"
     /></router-link>
     <!-- Logo Ends Here -->
 
     <!--Search Input Area Starts Here-->
     <input
-      @change="setSearchInput"
+      @change="mutateSearchInputInVuex"
       v-model="searchInput"
       type="text"
       placeholder="Search"
@@ -20,7 +20,7 @@
       <span class="user-status">{{ adminStatus }}</span>
       <label class="switch">
         <input
-          @change="setAdminStatus"
+          @change="mutateAdminStatusInVuex"
           v-model="isAdmin"
           type="checkbox"
           checked
@@ -37,16 +37,25 @@ export default {
   name: "HeaderComponent",
   data() {
     return {
-      searchInput: "",
-      isAdmin: false,
+      searchInput: this.$store.state.searchInput,
+      isAdmin: this.$store.state.isAdmin,
     };
   },
   methods: {
-    setAdminStatus() {
-      this.$emit("setAdminStatus", this.isAdmin);
+    mutateAdminStatusInVuex() {
+      this.$store.commit("SET_ADMIN", this.isAdmin);
     },
-    setSearchInput() {
-      this.$emit("setSearchInput", this.searchInput);
+    mutateSearchInputInVuex() {
+      if (this.searchInput !== "") {
+        this.$store.commit("SET_SEARCH_INPUT", this.searchInput);
+        this.goSearchResultView();
+      }
+    },
+    goSearchResultView() {
+      this.$router.push({
+        name: "SearchResult",
+        params: { symbol: this.$store.state.searchInput },
+      });
     },
   },
   computed: {
@@ -60,8 +69,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 header {
-  width: 100vw;
-  height: 80px;
   padding: 0 70px;
   display: flex;
   align-items: center;

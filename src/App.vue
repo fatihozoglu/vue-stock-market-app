@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <HeaderComponent
-      @setAdminStatus="getAdminStatus"
-      @setSearchInput="getSearchInput"
-    />
+    <HeaderComponent class="header-component" />
     <router-view />
   </div>
 </template>
@@ -17,21 +14,9 @@ export default {
     HeaderComponent,
   },
   data() {
-    return {
-      isAdmin: false,
-      searchInput: "",
-    };
+    return {};
   },
-  methods: {
-    //Gets user-admin status from HeaderComponent
-    getAdminStatus(value) {
-      this.isAdmin = value;
-    },
-    // Gets search input value from HeaderComponent
-    getSearchInput(value) {
-      this.searchInput = value;
-    },
-  },
+  methods: {},
 };
 </script>
 
@@ -40,6 +25,10 @@ export default {
   background-color: #f4f8f9;
   width: 100vw;
   min-height: 100vh;
+}
+.header-component {
+  width: 100vw;
+  height: 80px;
 }
 #nav a.router-link-exact-active {
   color: #42b983;
