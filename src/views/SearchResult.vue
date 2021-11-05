@@ -1,7 +1,12 @@
 <template>
   <main class="main" v-if="stockData">
     <h1 class="title">
-      {{ stockData["Meta Data"]["2. Symbol"] }} Last Day Information
+      {{ stockData["Meta Data"]["2. Symbol"] }}
+      Last Stock Market Session Information ({{
+        new Date(
+          Object.keys(stockData["Time Series (Daily)"])[0]
+        ).toLocaleDateString("en-US")
+      }})
     </h1>
     <CardsContainer class="cards-container" />
     <CandlestickChart class="chart" />
@@ -38,7 +43,7 @@ export default {
 .main {
   width: 100vw;
   min-height: 100vh;
-  padding: 30px 70px 50px 70px;
+  padding: 30px 70px 70px;
 }
 .title {
   font-size: 18px;
@@ -48,5 +53,8 @@ export default {
 }
 .cards-container {
   margin-bottom: 30px;
+}
+.chart {
+  box-shadow: 0px 0px 10px 3px rgb(128, 128, 128);
 }
 </style>

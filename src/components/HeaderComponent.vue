@@ -51,6 +51,7 @@ export default {
       if (this.searchInput !== "") {
         this.$store.commit("SET_SEARCH_INPUT", this.searchInput);
         this.goSearchResultView();
+        this.searchInput = "";
       }
     },
     //Programmatic navigation for going SearchResult view when searchInput is changed
