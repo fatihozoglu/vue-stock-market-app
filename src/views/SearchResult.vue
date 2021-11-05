@@ -3,7 +3,7 @@
     <h1 class="title">
       {{ stockData["Meta Data"]["2. Symbol"] }} Last Day Information
     </h1>
-    <CardsContainer class="cards-container" :symbol="symbol" />
+    <CardsContainer class="cards-container" />
     <CandlestickChart class="chart" />
   </main>
 </template>
@@ -15,12 +15,6 @@ import CandlestickChart from "../components/CandlestickChart.vue";
 export default {
   name: "Home",
   components: { CardsContainer, CandlestickChart },
-  props: {
-    symbol: {
-      type: String,
-      required: true,
-    },
-  },
   computed: {
     searchInput() {
       return this.$store.state.searchInput;
@@ -30,12 +24,12 @@ export default {
     },
   },
   watch: {
-    $route() {
-      this.$store.dispatch("fetchStockData", this.searchInput);
+    searchInput() {
+      this.$store.dispatch("fetchStockData");
     },
   },
   mounted() {
-    this.$store.dispatch("fetchStockData", this.searchInput);
+    this.$store.dispatch("fetchStockData");
   },
 };
 </script>

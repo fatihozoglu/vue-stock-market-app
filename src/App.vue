@@ -13,10 +13,6 @@ export default {
   components: {
     HeaderComponent,
   },
-  data() {
-    return {};
-  },
-  methods: {},
 };
 </script>
 

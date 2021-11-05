@@ -11,7 +11,7 @@ const routes = [
     component: Home,
   },
   {
-    path: "/symbol/:symbol",
+    path: "/symbol/",
     name: "SearchResult",
     props: true,
     component: () =>

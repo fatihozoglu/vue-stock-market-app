@@ -1,5 +1,7 @@
 <template>
-  <div class="chart" ref="chart"></div>
+  <div>
+    <div class="chart" ref="chart"></div>
+  </div>
 </template>
 
 <script>
@@ -7,17 +9,38 @@ import * as d3 from "d3";
 
 export default {
   name: "CandlestickChart",
-  data() {
-    return {
-      data: null,
-    };
-  },
   computed: {
+    // Getting the stock data from Vuex and re-formatting it as an array of objects for the use of our Candlestick Chart
     formattedStockData() {
-      return this.$store.getters.formattedStockData;
+      let dataArray = [];
+      for (let data in this.$store.state.stockData["Time Series (Daily)"]) {
+        let newObject = {
+          Date: data,
+          Open: this.$store.state.stockData["Time Series (Daily)"][data][
+            "1. open"
+          ],
+          High: this.$store.state.stockData["Time Series (Daily)"][data][
+            "2. high"
+          ],
+          Low: this.$store.state.stockData["Time Series (Daily)"][data][
+            "3. low"
+          ],
+          Close:
+            this.$store.state.stockData["Time Series (Daily)"][data][
+              "4. close"
+            ],
+          Volume:
+            this.$store.state.stockData["Time Series (Daily)"][data][
+              "5. volume"
+            ],
+        };
+        dataArray.push(newObject);
+      }
+      return dataArray;
     },
   },
   methods: {
+    // Candlestick Chart creator function returning a SVG element which will be invoked when the component is mounted and whenever the stockData changes
     CandlestickChart(
       data,
       {
@@ -161,8 +184,9 @@ High: ${formatValue(Yh[i])}`;
 
       return svg.node();
     },
+    //Invoking function for CanclestickChart function
     makeChart() {
-      this.CandlestickChart(this.data, {
+      this.CandlestickChart(this.formattedStockData, {
         date: (d) => new Date(d.Date),
         high: (d) => d.High,
         low: (d) => d.Low,
@@ -174,8 +198,17 @@ High: ${formatValue(Yh[i])}`;
       });
     },
   },
+  watch: {
+    //Watching for the change in our formattedStock computed property and when it changes we delete the old SVG element (our chart) and invoke makeChart function to append the new SVG element (chart) with the new data coming from Vuex
+    formattedStockData() {
+      while (this.$refs.chart.firstChild) {
+        this.$refs.chart.firstChild.remove();
+      }
+      this.makeChart();
+    },
+  },
   mounted() {
-    this.data = this.formattedStockData;
+    //Invoking the makeChart function when the component mounts
     this.makeChart();
   },
 };

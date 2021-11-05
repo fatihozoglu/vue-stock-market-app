@@ -21,10 +21,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    fetchStockData(context, symbol) {
-      console.log("Fetching");
+    fetchStockData(context) {
+      console.log("New Fetch");
       fetch(
-        `https://alpha-vantage.p.rapidapi.com/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=compact&datatype=json`,
+        `https://alpha-vantage.p.rapidapi.com/query?function=TIME_SERIES_DAILY&symbol=${context.state.searchInput}&outputsize=compact&datatype=json`,
         {
           method: "GET",
           headers: {
@@ -35,27 +35,12 @@ export default new Vuex.Store({
         }
       )
         .then((res) => res.json())
-        .then((res) => context.commit("SET_STOCK_DATA", res))
+        .then((res) => {
+          context.commit("SET_STOCK_DATA", res);
+        })
         .catch((err) => {
           console.error(err);
         });
-    },
-  },
-  getters: {
-    formattedStockData: (state) => {
-      let dataArray = [];
-      for (let data in state.stockData["Time Series (Daily)"]) {
-        let newObject = {
-          Date: data,
-          Open: state.stockData["Time Series (Daily)"][data]["1. open"],
-          High: state.stockData["Time Series (Daily)"][data]["2. high"],
-          Low: state.stockData["Time Series (Daily)"][data]["3. low"],
-          Close: state.stockData["Time Series (Daily)"][data]["4. close"],
-          Volume: state.stockData["Time Series (Daily)"][data]["5. volume"],
-        };
-        dataArray.push(newObject);
-      }
-      return dataArray;
     },
   },
 });

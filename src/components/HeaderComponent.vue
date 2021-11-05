@@ -37,27 +37,31 @@ export default {
   name: "HeaderComponent",
   data() {
     return {
-      searchInput: this.$store.state.searchInput,
-      isAdmin: this.$store.state.isAdmin,
+      searchInput: "",
+      isAdmin: false,
     };
   },
   methods: {
+    //Whenever the admin status changes, this function is invoked and mutates Vuex's "isAdmin" value
     mutateAdminStatusInVuex() {
       this.$store.commit("SET_ADMIN", this.isAdmin);
     },
+    //Whenever the sarch input changes, this function is invoked and mutates Vuex's "searchInput" value
     mutateSearchInputInVuex() {
       if (this.searchInput !== "") {
         this.$store.commit("SET_SEARCH_INPUT", this.searchInput);
         this.goSearchResultView();
       }
     },
+    //Programmatic navigation for going SearchResult view when searchInput is changed
     goSearchResultView() {
       this.$router.push({
         name: "SearchResult",
-        params: { symbol: this.$store.state.searchInput },
+        query: { symbol: this.searchInput },
       });
     },
   },
+  //Calculates which type of use is active based on isAdmin value, if isAdmin is false; it is normal user, if isAdmin is true; it is Admin
   computed: {
     adminStatus() {
       return this.isAdmin === false ? "User" : "Admin";
