@@ -1,21 +1,32 @@
 <template>
   <main class="main" v-if="stockData">
+    <h1 class="title">
+      {{ searchInput }} Last Market Session {{ timeSeriesName }} Information
+    </h1>
+    <CardsContainer />
     <CandlestickChart class="chart" />
   </main>
 </template>
 
 <script>
+import CardsContainer from "../components/CardsContainer.vue";
 import CandlestickChart from "../components/CandlestickChart.vue";
 
 export default {
   name: "SearchResult",
-  components: { CandlestickChart },
+  components: {
+    CardsContainer,
+    CandlestickChart,
+  },
   computed: {
     searchInput() {
       return this.$store.state.searchInput;
     },
     stockData() {
       return this.$store.state.stockData;
+    },
+    timeSeriesName() {
+      return this.$store.getters.timeSeriesName;
     },
   },
   watch: {

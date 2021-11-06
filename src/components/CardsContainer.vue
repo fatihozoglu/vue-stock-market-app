@@ -39,8 +39,8 @@ export default {
   name: "CarsContainer",
   computed: {
     stockDataLastDayInfo() {
-      return this.$store.state.stockData["Time Series (Daily)"][
-        Object.keys(this.$store.state.stockData["Time Series (Daily)"])[0]
+      return this.$store.state.stockData[0][
+        Object.keys(this.$store.state.stockData[0])
       ];
     },
   },
