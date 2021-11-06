@@ -1,5 +1,17 @@
 <template>
-  <div class="chart" ref="chart"></div>
+  <div class="chart-container">
+    <div ref="chart"></div>
+    <div class="options">
+      <input type="radio" name="option" id="daily" value="daily" checked />
+      <label class="option" for="daily">Daily</label>
+      <span>|</span>
+      <input type="radio" name="option" id="weekly" value="weekly" />
+      <label class="option" for="weekly">Weekly</label>
+      <span>|</span>
+      <input type="radio" name="option" id="monthly" value="monthly" />
+      <label class="option" for="monthly">Monthly</label>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -48,19 +60,19 @@ export default {
         high = (d) => d.high, // given d in data, returns a (quantitative) y-value
         low = (d) => d.low, // given d in data, returns a (quantitative) y-value
         title, // given d in data, returns the title text
-        marginTop = 20, // top margin, in pixels
+        marginTop = 70, // top margin, in pixels
         marginRight = 30, // right margin, in pixels
         marginBottom = 30, // bottom margin, in pixels
         marginLeft = 40, // left margin, in pixels
         width = 640, // outer width, in pixels
         height = 400, // outer height, in pixels
         xDomain, // array of x-values (defaults to every weekday)
-        xRange = [marginLeft, width - marginRight], // [left, right]
+        xRange = [marginLeft + 20, width - marginRight], // [left, right]
         xPadding = 0.2,
         xTicks, // array of x-values to label (defaults to every other Monday)
         yType = d3.scaleLinear, // type of y-scale
         yDomain, // [ymin, ymax]
-        yRange = [height - marginBottom, marginTop], // [bottom, top]
+        yRange = [height - marginBottom - 30, marginTop], // [bottom, top]
         xFormat = "%b %-d", // a format specifier for the date on the x-axis
         yFormat = "~f", // a format specifier for the value on the y-axis
         yLabel, // a label for the y-axis
@@ -179,8 +191,6 @@ High: ${formatValue(Yh[i])}`;
         .attr("stroke", (i) => colors[1 + Math.sign(Yo[i] - Yc[i])]);
 
       if (title) g.append("title").text(title);
-
-      return svg.node();
     },
     //Invoking function for CanclestickChart function
     makeChart() {
@@ -192,7 +202,7 @@ High: ${formatValue(Yh[i])}`;
         close: (d) => d.Close,
         yLabel: "↑ Price ($)",
         width: 1200,
-        height: 500,
+        height: 550,
       });
     },
   },
@@ -214,10 +224,36 @@ High: ${formatValue(Yh[i])}`;
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.chart {
+.chart-container {
+  position: relative;
   width: 100%;
   padding: 30px;
   border-radius: 10px;
   background-color: white;
+}
+.options {
+  position: absolute;
+  top: 20px;
+  left: 35%;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid grey;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+.option {
+  width: 60px;
+  text-align: center;
+}
+input {
+  display: none;
+}
+input:checked + label {
+  font-weight: bold;
+}
+label {
+  cursor: pointer;
 }
 </style>

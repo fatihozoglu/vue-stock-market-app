@@ -11,9 +11,8 @@ const routes = [
     component: Home,
   },
   {
-    path: "/symbol/",
+    path: "/symbol/:symbol",
     name: "SearchResult",
-    props: true,
     component: () =>
       import(
         /* webpackChunkName: "search-result" */ "../views/SearchResult.vue"

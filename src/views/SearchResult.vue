@@ -18,7 +18,7 @@ import CardsContainer from "../components/CardsContainer.vue";
 import CandlestickChart from "../components/CandlestickChart.vue";
 
 export default {
-  name: "Home",
+  name: "SearchResult",
   components: { CardsContainer, CandlestickChart },
   computed: {
     searchInput() {

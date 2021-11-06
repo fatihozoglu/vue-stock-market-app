@@ -24,7 +24,7 @@ export default new Vuex.Store({
     fetchStockData(context) {
       console.log("New Fetch");
       fetch(
-        `https://alpha-vantage.p.rapidapi.com/query?function=TIME_SERIES_DAILY&symbol=${context.state.searchInput}&outputsize=compact&datatype=json`,
+        `https://alpha-vantage.p.rapidapi.com/query?function=TIME_SERIES_DAILY&symbol=${context.state.searchInput}&datatype=json`,
         {
           method: "GET",
           headers: {

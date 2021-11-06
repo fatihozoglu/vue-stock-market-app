@@ -58,7 +58,7 @@ export default {
     goSearchResultView() {
       this.$router.push({
         name: "SearchResult",
-        query: { symbol: this.searchInput },
+        params: { symbol: this.searchInput },
       });
     },
   },
