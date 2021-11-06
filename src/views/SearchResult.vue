@@ -1,25 +1,15 @@
 <template>
   <main class="main" v-if="stockData">
-    <h1 class="title">
-      {{ stockData["Meta Data"]["2. Symbol"] }}
-      Last Stock Market Session Information ({{
-        new Date(
-          Object.keys(stockData["Time Series (Daily)"])[0]
-        ).toLocaleDateString("en-US")
-      }})
-    </h1>
-    <CardsContainer class="cards-container" />
     <CandlestickChart class="chart" />
   </main>
 </template>
 
 <script>
-import CardsContainer from "../components/CardsContainer.vue";
 import CandlestickChart from "../components/CandlestickChart.vue";
 
 export default {
   name: "SearchResult",
-  components: { CardsContainer, CandlestickChart },
+  components: { CandlestickChart },
   computed: {
     searchInput() {
       return this.$store.state.searchInput;

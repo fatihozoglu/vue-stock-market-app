@@ -2,14 +2,33 @@
   <div class="chart-container">
     <div ref="chart"></div>
     <div class="options">
-      <input type="radio" name="option" id="daily" value="daily" checked />
-      <label class="option" for="daily">Daily</label>
+      <input
+        v-model="timeSeries"
+        type="radio"
+        name="option"
+        id="daily"
+        value="TIME_SERIES_DAILY"
+        checked
+      />
+      <label class="option-label" for="daily">Daily</label>
       <span>|</span>
-      <input type="radio" name="option" id="weekly" value="weekly" />
-      <label class="option" for="weekly">Weekly</label>
+      <input
+        v-model="timeSeries"
+        type="radio"
+        name="option"
+        id="weekly"
+        value="TIME_SERIES_WEEKLY"
+      />
+      <label class="option-label" for="weekly">Weekly</label>
       <span>|</span>
-      <input type="radio" name="option" id="monthly" value="monthly" />
-      <label class="option" for="monthly">Monthly</label>
+      <input
+        v-model="timeSeries"
+        type="radio"
+        name="option"
+        id="monthly"
+        value="TIME_SERIES_MONTHLY"
+      />
+      <label class="option-label" for="monthly">Monthly</label>
     </div>
   </div>
 </template>
@@ -19,33 +38,24 @@ import * as d3 from "d3";
 
 export default {
   name: "CandlestickChart",
+  data() {
+    return {
+      timeSeries: "TIME_SERIES_DAILY",
+    };
+  },
   computed: {
     // Getting the stock data from Vuex and re-formatting it as an array of objects for the use of our Candlestick Chart
     formattedStockData() {
-      let dataArray = [];
-      for (let data in this.$store.state.stockData["Time Series (Daily)"]) {
-        let newObject = {
-          Date: data,
-          Open: this.$store.state.stockData["Time Series (Daily)"][data][
-            "1. open"
-          ],
-          High: this.$store.state.stockData["Time Series (Daily)"][data][
-            "2. high"
-          ],
-          Low: this.$store.state.stockData["Time Series (Daily)"][data][
-            "3. low"
-          ],
-          Close:
-            this.$store.state.stockData["Time Series (Daily)"][data][
-              "4. close"
-            ],
-          Volume:
-            this.$store.state.stockData["Time Series (Daily)"][data][
-              "5. volume"
-            ],
+      let dataArray = this.$store.state.stockData.map((item) => {
+        return {
+          Date: Object.keys(item),
+          Open: item[Object.keys(item)]["1. open"],
+          High: item[Object.keys(item)]["2. high"],
+          Low: item[Object.keys(item)]["3. low"],
+          Close: item[Object.keys(item)]["4. close"],
+          Volume: item[Object.keys(item)]["5. volume"],
         };
-        dataArray.push(newObject);
-      }
+      });
       return dataArray;
     },
   },
@@ -200,6 +210,26 @@ High: ${formatValue(Yh[i])}`;
         low: (d) => d.Low,
         open: (d) => d.Open,
         close: (d) => d.Close,
+        xDomain: this.$store.state.stockData
+          .map((item) => new Date(Object.keys(item)))
+          .reverse(),
+        xTicks: this.$store.state.stockData
+          .map((item) => new Date(Object.keys(item)))
+          .filter((item, index) => {
+            if (index % 7 === 0) return item;
+          }),
+        yDomain: [
+          Math.min(
+            ...this.$store.state.stockData.map(
+              (item) => item[Object.keys(item)]["3. low"]
+            )
+          ),
+          Math.max(
+            ...this.$store.state.stockData.map(
+              (item) => item[Object.keys(item)]["2. high"]
+            )
+          ),
+        ],
         yLabel: "↑ Price ($)",
         width: 1200,
         height: 550,
@@ -213,6 +243,10 @@ High: ${formatValue(Yh[i])}`;
         this.$refs.chart.firstChild.remove();
       }
       this.makeChart();
+    },
+    timeSeries() {
+      this.$store.commit("SET_TIME_SERIES", this.timeSeries);
+      this.$store.dispatch("fetchStockData");
     },
   },
   mounted() {
@@ -243,7 +277,7 @@ High: ${formatValue(Yh[i])}`;
   border-radius: 20px;
   padding: 10px 20px;
 }
-.option {
+.option-label {
   width: 60px;
   text-align: center;
 }

@@ -8,6 +8,7 @@ export default new Vuex.Store({
     isAdmin: false,
     searchInput: "",
     stockData: "",
+    timeSeries: "TIME_SERIES_DAILY",
   },
   mutations: {
     SET_ADMIN(state, payload) {
@@ -19,12 +20,15 @@ export default new Vuex.Store({
     SET_STOCK_DATA(state, payload) {
       state.stockData = payload;
     },
+    SET_TIME_SERIES(state, payload) {
+      state.timeSeries = payload;
+    },
   },
   actions: {
     fetchStockData(context) {
       console.log("New Fetch");
       fetch(
-        `https://alpha-vantage.p.rapidapi.com/query?function=TIME_SERIES_DAILY&symbol=${context.state.searchInput}&datatype=json`,
+        `https://alpha-vantage.p.rapidapi.com/query?function=${context.state.timeSeries}&symbol=${context.state.searchInput}&datatype=json`,
         {
           method: "GET",
           headers: {
@@ -36,11 +40,30 @@ export default new Vuex.Store({
       )
         .then((res) => res.json())
         .then((res) => {
-          context.commit("SET_STOCK_DATA", res);
+          let arrayData = Object.keys(res[context.getters.timeSeriesName]).map(
+            (item) => ({
+              [item]: res[context.getters.timeSeriesName][item],
+            })
+          );
+          arrayData = arrayData.slice(0, 100);
+          context.commit("SET_STOCK_DATA", arrayData);
+          console.log(context.state.stockData);
         })
         .catch((err) => {
           console.error(err);
         });
+    },
+  },
+  getters: {
+    timeSeriesName(state) {
+      switch (state.timeSeries) {
+        case "TIME_SERIES_DAILY":
+          return "Time Series (Daily)";
+        case "TIME_SERIES_WEEKLY":
+          return "Weekly Time Series";
+        case "TIME_SERIES_MONTHLY":
+          return "Monthly Time Series";
+      }
     },
   },
 });
