@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HeaderComponent class="header-component" />
-    <router-view />
+    <router-view :routeChangeArray="routeChangeArray" />
   </div>
 </template>
 
@@ -10,8 +10,19 @@ import HeaderComponent from "./components/HeaderComponent.vue";
 
 export default {
   name: "App",
+  data() {
+    return {
+      routeChangeArray: [],
+    };
+  },
   components: {
     HeaderComponent,
+  },
+  watch: {
+    $route(to, from) {
+      let newRouteItem = `User went from "${from.path}" to "${to.path}"`;
+      this.routeChangeArray.push(newRouteItem);
+    },
   },
 };
 </script>

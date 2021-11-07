@@ -17,6 +17,9 @@
 
     <!--User-Admin Switcher Starts Here-->
     <div class="user-switch">
+      <div>
+        <router-link :to="{ name: 'RouteLogs' }">Logs</router-link>
+      </div>
       <span class="user-status">{{ adminStatus }}</span>
       <label class="switch">
         <input

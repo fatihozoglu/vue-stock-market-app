@@ -18,6 +18,13 @@ const routes = [
         /* webpackChunkName: "search-result" */ "../views/SearchResult.vue"
       ),
   },
+  {
+    path: "/route-logs",
+    name: "RouteLogs",
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "search-result" */ "../views/RouteLogs.vue"),
+  },
 ];
 
 const router = new VueRouter({
