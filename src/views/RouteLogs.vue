@@ -19,7 +19,7 @@ export default {
 
 <style scoped>
 .logs {
-  padding: 20px 70px;
+  padding: 40px 70px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -31,7 +31,7 @@ export default {
   justify-content: flex-start;
   font-size: 18px;
   font-weight: 400;
-  background-color: rgb(248, 255, 255);
+  background-color: white;
   border: 1px solid rgb(180, 180, 180);
   border-radius: 10px;
 }

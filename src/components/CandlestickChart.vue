@@ -260,7 +260,6 @@ High: ${formatValue(Yh[i])}`;
 <style scoped>
 .chart-container {
   position: relative;
-  width: 100%;
   padding: 30px;
   border-radius: 10px;
   background-color: white;

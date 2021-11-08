@@ -63,9 +63,11 @@ export default {
 }
 .card-heading {
   margin-bottom: 5px;
+  margin: 0;
 }
 .card-body {
   font-size: 28px;
   font-weight: 800;
+  margin: 0;
 }
 </style>

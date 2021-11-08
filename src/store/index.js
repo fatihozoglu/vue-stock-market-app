@@ -34,7 +34,6 @@ export default new Vuex.Store({
   },
   actions: {
     fetchStockData(context) {
-      console.log("New Fetch");
       fetch(
         `https://alpha-vantage.p.rapidapi.com/query?function=${context.state.timeSeries}&symbol=${context.state.searchInput}&datatype=json`,
         {
@@ -55,7 +54,6 @@ export default new Vuex.Store({
           );
           arrayData = arrayData.slice(0, 100);
           context.commit("SET_STOCK_DATA", arrayData);
-          console.log(context.state.stockData);
         })
         .catch((err) => {
           console.error(err);

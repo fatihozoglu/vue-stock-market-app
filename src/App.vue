@@ -23,24 +23,30 @@ export default {
   },
   watch: {
     $route(to, from) {
-      let newRouteItem = `User navigated from "${from.path}" to "${to.path}"`;
+      let newRouteItem = `User navigated from "${from.path}" to "${
+        to.path
+      }" -- ${new Date().toLocaleString()}`;
       this.$store.commit("SET_ROUTE_CHANGE_ARRAY", newRouteItem);
     },
   },
 };
 </script>
 
-<style scoped>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
 #app {
   background-color: #f4f8f9;
   width: 100vw;
+  max-width: 1280px;
   min-height: 100vh;
+  margin: 0 auto;
 }
 .header-component {
-  width: 100vw;
   height: 80px;
-}
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>

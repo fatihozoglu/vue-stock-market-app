@@ -12,7 +12,7 @@ const routes = [
     component: Home,
   },
   {
-    path: "/symbol/:symbol",
+    path: `/symbol/:symbol`,
     name: "SearchResult",
     component: () =>
       import(
@@ -30,9 +30,9 @@ const routes = [
         store.commit("SET_ALERT_STATUS", true);
         store.commit(
           "SET_ROUTE_CHANGE_ARRAY",
-          `Unauthorized attemp to navigate "/route-logs" at ${new Date().toLocaleString()}`
+          `Unauthorized attemp to navigate "/route-logs" -- ${new Date().toLocaleString()}`
         );
-        next({ name: "Home" });
+        next({ path: from.fullPath });
       }
     },
   },

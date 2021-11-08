@@ -53,8 +53,12 @@ export default {
     },
     //Whenever the sarch input changes, this function is invoked and mutates Vuex's "searchInput" value
     mutateSearchInputInVuex() {
-      if (this.searchInput !== "") {
+      if (
+        this.searchInput !== "" &&
+        this.searchInput !== this.$store.state.searchInput
+      ) {
         this.$store.commit("SET_SEARCH_INPUT", this.searchInput);
+        localStorage.setItem("searchInput", this.searchInput);
         this.goSearchResultView();
         this.searchInput = "";
       }
@@ -119,7 +123,7 @@ input {
   color: black;
   padding: 10px 20px;
   border: 1px solid grey;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .logs-route:hover {
   background-color: rgb(231, 247, 247);

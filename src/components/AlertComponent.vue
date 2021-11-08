@@ -18,13 +18,14 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 .alert-box {
   width: 40%;
@@ -32,8 +33,8 @@ export default {
   padding: 50px 30px;
   font-size: 20px;
   font-weight: 600;
-  border: 1px solid grey;
+  border: 2px solid grey;
   border-radius: 5px;
-  background-color: white;
+  background-color: rgba(255, 255, 255);
 }
 </style>

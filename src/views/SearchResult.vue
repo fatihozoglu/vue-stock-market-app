@@ -34,7 +34,12 @@ export default {
       this.$store.dispatch("fetchStockData");
     },
   },
-  mounted() {
+  created() {
+    if (this.searchInput === "")
+      this.$store.commit(
+        "SET_SEARCH_INPUT",
+        localStorage.getItem("searchInput")
+      );
     this.$store.dispatch("fetchStockData");
   },
 };
@@ -42,8 +47,6 @@ export default {
 
 <style scoped>
 .main {
-  width: 100vw;
-  min-height: 100vh;
   padding: 30px 70px 70px;
 }
 .title {
@@ -56,6 +59,6 @@ export default {
   margin-bottom: 30px;
 }
 .chart {
-  box-shadow: 0px 0px 10px 3px rgb(128, 128, 128);
+  box-shadow: 0px 0px 5px 1px rgb(128, 128, 128);
 }
 </style>
