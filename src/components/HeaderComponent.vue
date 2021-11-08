@@ -11,25 +11,27 @@
       @change="mutateSearchInputInVuex"
       v-model="searchInput"
       type="text"
-      placeholder="Search"
+      placeholder="Search Stock Symbol"
     />
     <!--Search Input Area Ends Here-->
 
     <!--User-Admin Switcher Starts Here-->
-    <div class="user-switch">
-      <div>
-        <router-link :to="{ name: 'RouteLogs' }">Logs</router-link>
+    <div class="switch-container">
+      <router-link class="logs-route" :to="{ name: 'RouteLogs' }"
+        >Logs</router-link
+      >
+      <div class="user-switch">
+        <span class="user-status">{{ adminStatus }}</span>
+        <label class="switch">
+          <input
+            @change="mutateAdminStatusInVuex"
+            v-model="isAdmin"
+            type="checkbox"
+            checked
+          />
+          <span class="slider round"></span>
+        </label>
       </div>
-      <span class="user-status">{{ adminStatus }}</span>
-      <label class="switch">
-        <input
-          @change="mutateAdminStatusInVuex"
-          v-model="isAdmin"
-          type="checkbox"
-          checked
-        />
-        <span class="slider round"></span>
-      </label>
     </div>
     <!--User-Admin Switcher Ends Here-->
   </header>
@@ -105,6 +107,22 @@ input {
   background-size: 25px;
   background-position-y: center;
   background-position-x: 10px;
+}
+.switch-container {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logs-route {
+  text-decoration: none;
+  color: black;
+  padding: 10px 20px;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+.logs-route:hover {
+  background-color: rgb(231, 247, 247);
 }
 .user-switch {
   display: flex;

@@ -2,7 +2,7 @@
   <main class="logs">
     <div
       class="route-item"
-      v-for="(route, index) in routeChangeArray"
+      v-for="(route, index) in this.$store.state.routeChangeArray"
       :key="index"
     >
       {{ route }}
@@ -13,12 +13,6 @@
 <script>
 export default {
   name: "RouteLog",
-  props: {
-    routeChangeArray: {
-      type: Array,
-      required: true,
-    },
-  },
 };
 </script>
 
@@ -36,7 +30,7 @@ export default {
   justify-content: flex-start;
   font-size: 18px;
   font-weight: 400;
-  background-color: azure;
+  background-color: rgb(248, 255, 255);
   border: 1px solid rgb(180, 180, 180);
   border-radius: 10px;
 }

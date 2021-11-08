@@ -9,6 +9,8 @@ export default new Vuex.Store({
     searchInput: "",
     stockData: "",
     timeSeries: "TIME_SERIES_DAILY",
+    routeChangeArray: [],
+    alertStatus: false,
   },
   mutations: {
     SET_ADMIN(state, payload) {
@@ -22,6 +24,12 @@ export default new Vuex.Store({
     },
     SET_TIME_SERIES(state, payload) {
       state.timeSeries = payload;
+    },
+    SET_ROUTE_CHANGE_ARRAY(state, payload) {
+      state.routeChangeArray.push(payload);
+    },
+    SET_ALERT_STATUS(state, payload) {
+      state.alertStatus = payload;
     },
   },
   actions: {

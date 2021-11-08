@@ -1,27 +1,30 @@
 <template>
   <div id="app">
     <HeaderComponent class="header-component" />
-    <router-view :routeChangeArray="routeChangeArray" />
+    <AlertComponent v-if="alertStatus" />
+    <router-view />
   </div>
 </template>
 
 <script>
 import HeaderComponent from "./components/HeaderComponent.vue";
+import AlertComponent from "./components/AlertComponent.vue";
 
 export default {
   name: "App",
-  data() {
-    return {
-      routeChangeArray: [],
-    };
-  },
   components: {
     HeaderComponent,
+    AlertComponent,
+  },
+  computed: {
+    alertStatus() {
+      return this.$store.state.alertStatus;
+    },
   },
   watch: {
     $route(to, from) {
-      let newRouteItem = `User went from "${from.path}" to "${to.path}"`;
-      this.routeChangeArray.push(newRouteItem);
+      let newRouteItem = `User navigated from "${from.path}" to "${to.path}"`;
+      this.$store.commit("SET_ROUTE_CHANGE_ARRAY", newRouteItem);
     },
   },
 };

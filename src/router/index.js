@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import store from "../store/index";
 
 Vue.use(VueRouter);
 
@@ -21,9 +22,19 @@ const routes = [
   {
     path: "/route-logs",
     name: "RouteLogs",
-    props: true,
     component: () =>
       import(/* webpackChunkName: "search-result" */ "../views/RouteLogs.vue"),
+    beforeEnter: (to, from, next) => {
+      if (store.state.isAdmin) next();
+      else {
+        store.commit("SET_ALERT_STATUS", true);
+        store.commit(
+          "SET_ROUTE_CHANGE_ARRAY",
+          `Unauthorized attemp to navigate "/route-logs" at ${new Date().toLocaleString()}`
+        );
+        next({ name: "Home" });
+      }
+    },
   },
 ];
 
