@@ -40,8 +40,7 @@ export default new Vuex.Store({
           method: "GET",
           headers: {
             "x-rapidapi-host": "alpha-vantage.p.rapidapi.com",
-            "x-rapidapi-key":
-              "3f6c2cfd89msha6a53de41a6dc67p1a51dcjsn759408a3571f",
+            "x-rapidapi-key": process.env.VUE_APP_API_KEY,
           },
         }
       )
