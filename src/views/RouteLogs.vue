@@ -5,7 +5,8 @@
       v-for="(route, index) in this.$store.state.routeChangeArray"
       :key="index"
     >
-      {{ route }}
+      <p v-if="route.split(' ')[0] === 'User'">{{ route }}</p>
+      <p v-else style="color: red">{{ route }}</p>
     </div>
   </main>
 </template>
