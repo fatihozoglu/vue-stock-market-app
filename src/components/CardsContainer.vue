@@ -1,33 +1,32 @@
 <template>
   <div class="cards-container">
     <div class="card" style="background-color: #fa5c01">
-      <p class="card-heading">OPEN</p>
+      <p class="card-heading">OPEN ($)</p>
       <p class="card-body">
-        $ {{ Number(stockDataLastDayInfo["1. open"]).toLocaleString("en-US") }}
+        {{ Number(stockDataLastDayInfo["1. open"]).toLocaleString("en-US") }}
       </p>
     </div>
     <div class="card" style="background-color: #8f83f4">
-      <p class="card-heading">HIGH</p>
+      <p class="card-heading">HIGH ($)</p>
       <p class="card-body">
-        $ {{ Number(stockDataLastDayInfo["2. high"]).toLocaleString("en-US") }}
+        {{ Number(stockDataLastDayInfo["2. high"]).toLocaleString("en-US") }}
       </p>
     </div>
     <div class="card" style="background-color: #3e8870">
-      <p class="card-heading">LOW</p>
+      <p class="card-heading">LOW ($)</p>
       <p class="card-body">
-        $ {{ Number(stockDataLastDayInfo["3. low"]).toLocaleString("en-US") }}
+        {{ Number(stockDataLastDayInfo["3. low"]).toLocaleString("en-US") }}
       </p>
     </div>
     <div class="card" style="background-color: #fa5292">
-      <p class="card-heading">CLOSE</p>
+      <p class="card-heading">CLOSE ($)</p>
       <p class="card-body">
-        $ {{ Number(stockDataLastDayInfo["4. close"]).toLocaleString("en-US") }}
+        {{ Number(stockDataLastDayInfo["4. close"]).toLocaleString("en-US") }}
       </p>
     </div>
     <div class="card" style="background-color: #25a9ed">
-      <p class="card-heading">VOLUME</p>
+      <p class="card-heading">VOLUME ($)</p>
       <p class="card-body">
-        $
         {{ Number(stockDataLastDayInfo["5. volume"]).toLocaleString("en-US") }}
       </p>
     </div>

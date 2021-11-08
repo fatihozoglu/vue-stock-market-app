@@ -78,7 +78,7 @@ export default {
         height = 400, // outer height, in pixels
         xDomain, // array of x-values (defaults to every weekday)
         xRange = [marginLeft + 20, width - marginRight], // [left, right]
-        xPadding = 0.2,
+        xPadding = 0.3,
         xTicks, // array of x-values to label (defaults to every other Monday)
         yType = d3.scaleLinear, // type of y-scale
         yDomain, // [ymin, ymax]
