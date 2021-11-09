@@ -28,10 +28,12 @@ const routes = [
       if (store.state.isAdmin) next();
       else {
         store.commit("SET_ALERT_STATUS", true);
-        store.commit(
-          "SET_ROUTE_CHANGE_ARRAY",
-          `Unauthorized attemp to navigate "/route-logs" -- ${new Date().toLocaleString()}`
-        );
+        store.commit("SET_ROUTE_CHANGE_ARRAY", {
+          warning: true,
+          name: `Unauthorized Navigation Attempt - ${new Date().toLocaleString(
+            "en-US"
+          )}`,
+        });
         next({ path: from.fullPath });
       }
     },

@@ -1,19 +1,26 @@
 <template>
   <main class="logs">
-    <div
-      class="route-item"
-      v-for="(route, index) in this.$store.state.routeChangeArray"
-      :key="index"
-    >
-      <p v-if="route.split(' ')[0] === 'User'">{{ route }}</p>
-      <p v-else style="color: red">{{ route }}</p>
-    </div>
+    <v-treeview dense hoverable :items="items">
+      <template v-slot:label="{ item }">
+        <span v-if="item.warning" style="color: red">
+          {{ item.name }}
+        </span>
+        <span v-else>
+          {{ item.name }}
+        </span>
+      </template>
+    </v-treeview>
   </main>
 </template>
 
 <script>
 export default {
   name: "RouteLog",
+  computed: {
+    items() {
+      return this.$store.state.routeChangeArray;
+    },
+  },
 };
 </script>
 

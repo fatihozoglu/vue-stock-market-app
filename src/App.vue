@@ -1,9 +1,11 @@
 <template>
-  <div id="app">
-    <HeaderComponent class="header-component" />
-    <AlertComponent v-if="alertStatus" />
-    <router-view />
-  </div>
+  <v-app>
+    <div id="app">
+      <HeaderComponent class="header-component" />
+      <AlertComponent v-if="alertStatus" />
+      <router-view />
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -23,9 +25,13 @@ export default {
   },
   watch: {
     $route(to, from) {
-      let newRouteItem = `User navigated from "${from.path}" to "${
-        to.path
-      }" -- ${new Date().toLocaleString()}`;
+      let newRouteItem = {
+        name: `Route Change - ${new Date().toLocaleString("en-US")}`,
+        children: [
+          { name: `From : ${from.fullPath}` },
+          { name: `To : ${to.fullPath}` },
+        ],
+      };
       this.$store.commit("SET_ROUTE_CHANGE_ARRAY", newRouteItem);
     },
   },
