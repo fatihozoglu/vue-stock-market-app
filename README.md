@@ -1,6 +1,6 @@
 # Vue Stock Market App
 
-This is the solution for Reengen Full Stack Bootcamp with Vuejs and Nodejs Week-3 Project. It is built with Vuejs by using [Vue CLI](https://cli.vuejs.org/), [Vuex](https://vuex.vuejs.org/) and [Vue Router](https://router.vuejs.org/).
+This is the solution for Reengen Full Stack Bootcamp with Vuejs and Nodejs Week-3 Project. It is built with [Vuejs](https://vuejs.org/) by using [Vue CLI](https://cli.vuejs.org/), for state management: [Vuex](https://vuex.vuejs.org/), for routing: [Vue Router](https://router.vuejs.org/), for material design components and styling: [Vuetify](https://vuetifyjs.com/en/), for creating candlestick chart: [D3.js](https://d3js.org/) and for getting data from a REST API: [RapidAPI-Alpha-Vantage](https://rapidapi.com/alphavantage/api/alpha-vantage).
 
 You can check the [live demo here](http://fozoglu-vue-stock-market-app.surge.sh/).
 
@@ -47,10 +47,13 @@ The Stock Market App will consist of these functionalities:
 - [Vue CLI](https://cli.vuejs.org/)
 - [Vuex](https://vuex.vuejs.org/)
 - [Vue Router](https://router.vuejs.org/)
+- [Vuetify](https://vuetifyjs.com/en/)
+- [D3.js](https://d3js.org/)
+- [RapidAPI-Alpha-Vantage](https://rapidapi.com/alphavantage/api/alpha-vantage)
 
 ## Author
 
-- Portfolio Website - [Fatih Özoğlu](https://fatihozoglu.github.io/react-portfolio/)
+- Portfolio - [Fatih Özoğlu](https://fatihozoglu.github.io/react-portfolio/)
 - Linkedin - [Fatih Özoğlu](https://www.linkedin.com/in/fatihozoglu/)
 
 ## Project setup
