@@ -26,12 +26,13 @@ export default {
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   display: flex;
-  align-items: center;
   justify-content: center;
   z-index: 10;
+  padding-top: 100px;
 }
 .alert-box {
   width: 40%;
+  height: fit-content;
   padding: 50px 30px;
   font-size: 20px;
   font-weight: 600;
