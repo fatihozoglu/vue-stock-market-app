@@ -24,6 +24,7 @@ export default {
     },
   },
   watch: {
+    //Whenever the route changes, we add route change information Object to routeChangeArray in Vuex
     $route(to, from) {
       let newRouteItem = {
         name: `Route Change - ${new Date().toLocaleString("en-US")}`,

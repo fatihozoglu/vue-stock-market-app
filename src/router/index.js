@@ -24,9 +24,11 @@ const routes = [
     name: "RouteLogs",
     component: () =>
       import(/* webpackChunkName: "search-result" */ "../views/RouteLogs.vue"),
+    // BeforeEnter Navigation Guard for RouteLogs Component to prevent unauthorized navigation attemp from normal users
     beforeEnter: (to, from, next) => {
       if (store.state.isAdmin) next();
       else {
+        //When an unauthorized attempt occures, we set alarmStatus in Vuex to true for showing the AlertComponent.vue component
         store.commit("SET_ALERT_STATUS", true);
         store.commit("SET_ROUTE_CHANGE_ARRAY", {
           warning: true,
@@ -34,6 +36,7 @@ const routes = [
             "en-US"
           )}`,
         });
+        //This enables to stay on the same page when an unauthorized navigation attempt occures
         next({ path: from.fullPath });
       }
     },

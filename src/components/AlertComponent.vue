@@ -1,4 +1,5 @@
 <template>
+  <!-- This is the alert component for unauthorized route navigation -->
   <div class="alert-component">
     <div class="alert-box">
       <span class="icon">&#9888;</span> You are not authorized to navigate this
@@ -10,6 +11,7 @@
 <script>
 export default {
   name: "AlertComponent",
+  // When the alert status is true in Vuex this component is visible for 3 seconds after created and then disappears
   created() {
     setTimeout(() => this.$store.commit("SET_ALERT_STATUS", false), 3000);
   },

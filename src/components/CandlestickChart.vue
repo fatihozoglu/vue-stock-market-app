@@ -1,6 +1,8 @@
 <template>
+  <!-- Candlestick Chart container starts here-->
   <div class="chart-container">
     <div ref="chart"></div>
+    <!-- Daily-Weekly-Monthly Options radio buttons cntainer starts here -->
     <div class="options">
       <input
         v-model="timeSeries"
@@ -30,7 +32,9 @@
       />
       <label class="option-label" for="monthly">Monthly</label>
     </div>
+    <!-- Daily-Weekly-Monthly Options radio buttons cntainer ends here -->
   </div>
+  <!-- Candlestick Chart container ends here-->
 </template>
 
 <script>
@@ -40,6 +44,7 @@ export default {
   name: "CandlestickChart",
   data() {
     return {
+      //This data holds the information of which radio button is selected (Daily-Weekly-Monthly Time Series Options)
       timeSeries: "TIME_SERIES_DAILY",
     };
   },
@@ -202,7 +207,7 @@ High: ${formatValue(Yh[i])}`;
 
       if (title) g.append("title").text(title);
     },
-    //Invoking function for CanclestickChart function
+    //Invoking the CanclestickChart function with the computed formattedStockData to create the chart and add it to DOM
     makeChart() {
       this.CandlestickChart(this.formattedStockData, {
         date: (d) => new Date(d.Date),
@@ -244,11 +249,13 @@ High: ${formatValue(Yh[i])}`;
       }
       this.makeChart();
     },
+    //When the time series option is selected (daily-weeekly-monthly) the data is sent to Vuex and chart is re-created with the new data
     timeSeries() {
       this.$store.commit("SET_TIME_SERIES", this.timeSeries);
       this.$store.dispatch("fetchStockData");
     },
   },
+  //Creating the chart with the data from Vuex when the component is mounted
   mounted() {
     //Invoking the makeChart function when the component mounts
     this.makeChart();

@@ -58,6 +58,7 @@ export default {
         this.searchInput !== this.$store.state.searchInput
       ) {
         this.$store.commit("SET_SEARCH_INPUT", this.searchInput);
+        //Latest searchInput is saved in localStorage to be able to get the data again after a page refresh
         localStorage.setItem("searchInput", this.searchInput);
         this.goSearchResultView();
         this.searchInput = "";

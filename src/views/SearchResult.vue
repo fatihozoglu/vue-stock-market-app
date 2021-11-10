@@ -1,4 +1,5 @@
 <template>
+  <!-- Showing this component if we got the stockData from API in Vuex -->
   <main class="main" v-if="stockData">
     <h1 class="title">
       {{ searchInput }} Last Market Session {{ timeSeriesName }} Information
@@ -30,11 +31,13 @@ export default {
     },
   },
   watch: {
+    //Whenever searchInput data in Vuex changes we fetch the data again for new searchInput
     searchInput() {
       this.$store.dispatch("fetchStockData");
     },
   },
   created() {
+    //Fetch data when this component is created and add searchInput into localStorage for using in page refresh
     if (this.searchInput === "")
       this.$store.commit(
         "SET_SEARCH_INPUT",
