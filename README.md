@@ -33,7 +33,7 @@ The Stock Market App will consist of these functionalities:
 ### Links
 
 - Solution URL: [Github Link](https://github.com/fatihozoglu/vue-stock-market-app)
-- Live Site URL: [Vue Hotels App](http://fozoglu-vue-stock-market-app.surge.sh/)
+- Live Site URL: [Vue Stock Market App](http://fozoglu-vue-stock-market-app.surge.sh/)
 
 ## My process
 
