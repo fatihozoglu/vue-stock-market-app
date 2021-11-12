@@ -12,7 +12,10 @@ export default new Vuex.Store({
     //routeChangeArray keeps the information of navigation and unauthorized navigation attempt data
     routeChangeArray: [],
     //alertStatus is set to true in router/index.js beforeEnter Guard when an unauthorized navigation attempt occures
-    alertStatus: false,
+    alertStatus: {
+      status: false,
+      message: null,
+    },
   },
   mutations: {
     SET_ADMIN(state, payload) {
@@ -31,7 +34,7 @@ export default new Vuex.Store({
       state.routeChangeArray.push(payload);
     },
     SET_ALERT_STATUS(state, payload) {
-      state.alertStatus = payload;
+      state.alertStatus = { ...state.alertStatus, ...payload };
     },
   },
   actions: {
@@ -60,6 +63,11 @@ export default new Vuex.Store({
           context.commit("SET_STOCK_DATA", arrayData);
         })
         .catch((err) => {
+          context.commit("SET_ALERT_STATUS", {
+            status: true,
+            message:
+              "You exceeded API query limit. Please wait for a minute and try again.",
+          });
           console.error(err);
         });
     },

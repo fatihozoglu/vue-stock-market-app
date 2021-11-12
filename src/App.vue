@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     alertStatus() {
-      return this.$store.state.alertStatus;
+      return this.$store.state.alertStatus.status;
     },
   },
   watch: {

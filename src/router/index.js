@@ -29,7 +29,11 @@ const routes = [
       if (store.state.isAdmin) next();
       else {
         //When an unauthorized attempt occures, we set alarmStatus in Vuex to true for showing the AlertComponent.vue component
-        store.commit("SET_ALERT_STATUS", true);
+        store.commit("SET_ALERT_STATUS", {
+          status: true,
+          message:
+            "You are not authorized to navigate this page. Please Sign in as Admin",
+        });
         store.commit("SET_ROUTE_CHANGE_ARRAY", {
           warning: true,
           name: `Unauthorized Navigation Attempt - ${new Date().toLocaleString(

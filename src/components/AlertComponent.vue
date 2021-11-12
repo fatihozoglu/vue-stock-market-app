@@ -2,8 +2,8 @@
   <!-- This is the alert component for unauthorized route navigation -->
   <div class="alert-component">
     <div class="alert-box">
-      <span class="icon">&#9888;</span> You are not authorized to navigate this
-      page.
+      <span class="icon">&#9888;</span
+      ><span class="message">{{ alertMessage }}</span>
     </div>
   </div>
 </template>
@@ -11,9 +11,18 @@
 <script>
 export default {
   name: "AlertComponent",
+  computed: {
+    alertMessage() {
+      return this.$store.state.alertStatus.message;
+    },
+  },
   // When the alert status is true in Vuex this component is visible for 3 seconds after created and then disappears
   created() {
-    setTimeout(() => this.$store.commit("SET_ALERT_STATUS", false), 3000);
+    setTimeout(
+      () =>
+        this.$store.commit("SET_ALERT_STATUS", { status: false, message: "" }),
+      3000
+    );
   },
 };
 </script>
@@ -44,6 +53,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.message {
+  text-align: center;
 }
 .icon {
   font-size: 70px;
