@@ -39,6 +39,10 @@ const routes = [
           name: `Unauthorized Navigation Attempt - ${new Date().toLocaleString(
             "en-US"
           )}`,
+          children: [
+            { name: `From : ${from.fullPath}` },
+            { name: `To : ${to.fullPath}` },
+          ],
         });
         //This enables to stay on the same page when an unauthorized navigation attempt occures
         next({ path: from.fullPath });

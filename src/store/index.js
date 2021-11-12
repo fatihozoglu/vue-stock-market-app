@@ -68,6 +68,12 @@ export default new Vuex.Store({
             message:
               "You exceeded API query limit. Please wait for a minute and try again.",
           });
+          context.commit("SET_ROUTE_CHANGE_ARRAY", {
+            name: `API Query Limit Exceeded - ${new Date().toLocaleString(
+              "en-US"
+            )}`,
+            query: true,
+          });
           console.error(err);
         });
     },

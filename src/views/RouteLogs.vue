@@ -8,7 +8,11 @@
         <span v-if="item.warning" style="color: red">
           {{ item.name }}
         </span>
-        <!-- If there isn't a warning property in object(normal route change items) it will be displayed normally in black-->
+        <!-- If query property exists in object(API Query Limit Exceeded), it will be displayed in the logs in orange-->
+        <span v-if="item.query" style="color: rgb(125, 0, 0)">
+          {{ item.name }}
+        </span>
+        <!-- If there isn't a warning or query property in object(normal route change items) it will be displayed normally in black-->
         <span v-else>
           {{ item.name }}
         </span>
