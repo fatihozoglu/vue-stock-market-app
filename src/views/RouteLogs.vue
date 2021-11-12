@@ -5,11 +5,7 @@
       <!-- This part is used to style unauthorized navigation attempt items (They will be displayed in Red)-->
       <template v-slot:label="{ item }">
         <!-- If there is a warning property in the item(warning only exists in unauthorized navigation attempt objects) it's color is set as Red-->
-        <span v-if="item.warning" style="color: red">
-          {{ item.name }}
-        </span>
-        <!-- If query property exists in object(API Query Limit Exceeded), it will be displayed in the logs in orange-->
-        <span v-if="item.query" style="color: rgb(125, 0, 0)">
+        <span v-if="item.warning || item.query" style="color: red">
           {{ item.name }}
         </span>
         <!-- If there isn't a warning or query property in object(normal route change items) it will be displayed normally in black-->
